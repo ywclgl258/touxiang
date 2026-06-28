@@ -77,8 +77,8 @@ if "!NEEDS_COMMIT!"=="1" (
     if errorlevel 1 (
         echo [ERROR] git pull --rebase failed. Resolve conflicts manually:
         echo   git status
-        echo   git rebase --continue   (after fixing)
-        echo   git rebase --abort      (to undo)
+        echo   git rebase --continue   -- after fixing --
+        echo   git rebase --abort      -- to undo --
         pause
         exit /b 1
     )
