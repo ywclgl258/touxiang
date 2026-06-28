@@ -47,7 +47,7 @@ echo --- Pending changes ---
 git status --short
 echo.
 
-git status --porcelain | findstr /r "." >nul
+git status --porcelain | findstr "^" >nul
 set NEEDS_COMMIT=0
 if not errorlevel 1 set NEEDS_COMMIT=1
 
