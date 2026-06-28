@@ -70,9 +70,9 @@ if "!NEEDS_COMMIT!"=="1" (
         exit /b 1
     )
 
-    rem Pull with rebase to integrate remote changes (e.g. web edits) before push
+    rem Pull with rebase to integrate remote changes e.g. web edits before push
     echo.
-    echo === Pulling remote changes (rebase) ===
+    echo === Pulling remote changes via rebase ===
     git pull --rebase --autostash origin !BRANCH!
     if errorlevel 1 (
         echo [ERROR] git pull --rebase failed. Resolve conflicts manually:
