@@ -6,6 +6,17 @@ $branch = $env:BRANCH
 $remote = if ($remote) { $remote.Trim() } else { $remote }
 $branch = if ($branch) { $branch.Trim() } else { $branch }
 
+# Fallback: read from git if env not provided (so the script also works standalone)
+if (-not $remote) {
+    $remote = (& git remote get-url origin 2>$null) | Out-String
+    if ($remote) { $remote = $remote.Trim() }
+}
+if (-not $branch) {
+    $branch = (& git branch --show-current 2>$null) | Out-String
+    if ($branch) { $branch = $branch.Trim() }
+    if (-not $branch) { $branch = 'main' }
+}
+
 if (-not $remote -or $remote -notmatch 'github\.com[/:]([^/]+)/([^/.]+)') {
     Write-Host ('[ERROR] Cannot parse GitHub user/repo from remote: ' + $remote)
     exit 1
